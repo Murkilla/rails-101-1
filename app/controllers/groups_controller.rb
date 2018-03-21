@@ -5,6 +5,9 @@ class GroupsController < ApplicationController
     def new
         @groups = Group.new
     end
+    def show
+        @groups = Group.find(params[:id])
+    end
     def create
         @group = Group.new(group_params)
         @group.save
