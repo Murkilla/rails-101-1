@@ -37,7 +37,26 @@ class GroupsController < ApplicationController
             render :new
         end
     end
-
+    def join
+        @groups = Group.find(params[:id])
+        if !current_user.is_member_of?(@groups)
+            current_user.join!(@groups)
+            flash[:notice] = "Add to group success!!!"
+        else
+            flash[:warning] = "You're in this group already!!"
+        end
+        redirect_to group_path(@groups)
+    end
+    def quit
+        @groups = Group.find(params[:id])
+        if current_user.is_member_of?(@groups)
+            current_user.quit!(@groups)
+            flash[:notice] = "Quit from this group success!!!"
+        else
+            flash[:warning] = "You'ren't member in this group."
+        end
+        redirect_to group_path(@groups)
+    end
     private
 
     def group_params
