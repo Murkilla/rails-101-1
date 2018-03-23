@@ -2,7 +2,7 @@ class PostsController < ApplicationController
     before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
     def new
         @groups = Group.find(params[:group_id])
-        @post = Post.new
+        @posts = Post.new
     end
     def create
         @groups = Group.find(params[:group_id])
