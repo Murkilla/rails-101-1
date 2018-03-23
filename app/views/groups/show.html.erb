@@ -1,6 +1,8 @@
 <div class="col-md-12">
     <div class="group">
-        <%= link_to("Edit", edit_group_path(@groups), class: "btn btn-primary pull-right") %>
+        <% if current_user && current_user == @groups.user %>
+            <%= link_to("Edit", edit_group_path(@groups), class: "btn btn-primary pull-right") %>
+        <% end %>
     </div>
     <h2><%= @groups.title %></h2>
     <p><%= @groups.description %></p>
